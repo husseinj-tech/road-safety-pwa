@@ -1,0 +1,20 @@
+
+{
+  "name": "Road Safety Reporting System",
+  "short_name": "Road Safety",
+  "description": "Road Safety Reporting System",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f3f7f5",
+  "theme_color": "#00A86B",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
