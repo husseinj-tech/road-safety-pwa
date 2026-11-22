@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#00A86B">
+
+  <title>Road Safety Reporting System</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: Arial, sans-serif;
+      background: #f3f7f5;
+      color: #24332c;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 430px;
+      padding: 36px 26px;
+      text-align: center;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+    }
+
+    .logo {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 20px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 25px;
+    }
+
+    p {
+      color: #68766f;
+      line-height: 1.6;
+      font-size: 15px;
+      margin-bottom: 28px;
+    }
+
+    button, .launch-button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      border: 0;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .launch-button {
+      background: #00A86B;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    #installButton {
+      background: #edf5f1;
+      color: #008653;
+      display: none;
+    }
+
+    #message {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #68766f;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+
+    <img class="logo" src="./icon.svg" alt="Road Safety">
+
+    <h1>Road Safety Reporting System</h1>
+
+    <p>
+      Report safety issues and follow up on submitted reports.
+    </p>
+
+    <a
+      class="launch-button"
+      href="https://script.google.com/a/macros/totersapp.com/s/AKfycbwdZv1xTVsOqKnp_m-e33cFlcntkDlaJGEkaThLjUXdpHmIiYZ8QmMgDdue6CG-ksL2/exec"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Open Reporting System
+    </a>
+
+    <button id="installButton">
+      Install App
+    </button>
+
+    <div id="message">
+      Road Safety Reporting System
+    </div>
+
+  </main>
+
+  <script>
+    let installPrompt;
+
+    const installButton = document.getElementById("installButton");
+    const message = document.getElementById("message");
+
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      installPrompt = event;
+      installButton.style.display = "block";
+    });
+
+    installButton.addEventListener("click", async () => {
+      if (!installPrompt) return;
+
+      installPrompt.prompt();
+      await installPrompt.userChoice;
+
+      installPrompt = null;
+      installButton.style.display = "none";
+    });
+
+    window.addEventListener("appinstalled", () => {
+      installButton.style.display = "none";
+      message.textContent = "App installed successfully.";
+    });
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js")
+          .catch(error => {
+            console.error("Service Worker registration failed:", error);
+          });
+      });
+    }
+  </script>
+</body>
+</html>
