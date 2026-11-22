@@ -6,10 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#00A86B">
 
-  <title>Road Safety Reporting System</title>
+  <title>Toters | Road Safety</title>
 
   <link rel="manifest" href="./manifest.json">
-  <link rel="icon" href="./icon.svg" type="image/svg+xml">
 
   <style>
     * {
@@ -24,29 +23,31 @@
       justify-content: center;
       padding: 24px;
       font-family: Arial, sans-serif;
-      background: #f3f7f5;
+      background: #f4f7f5;
       color: #24332c;
     }
 
     .container {
       width: 100%;
       max-width: 430px;
-      padding: 36px 26px;
+      padding: 38px 26px;
       text-align: center;
       background: white;
       border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+      box-shadow: 0 8px 30px rgba(0,0,0,.07);
     }
 
     .logo {
-      width: 76px;
-      height: 76px;
-      margin: 0 auto 20px;
+      width: 190px;
+      max-width: 85%;
+      height: auto;
+      object-fit: contain;
+      margin: 0 auto 28px;
     }
 
     h1 {
-      margin: 0 0 12px;
-      font-size: 25px;
+      font-size: 23px;
+      margin-bottom: 12px;
     }
 
     p {
@@ -56,7 +57,7 @@
       margin-bottom: 28px;
     }
 
-    button, .launch-button {
+    .launch-button, #installButton {
       display: block;
       width: 100%;
       padding: 15px;
@@ -75,9 +76,9 @@
     }
 
     #installButton {
+      display: none;
       background: #edf5f1;
       color: #008653;
-      display: none;
     }
 
     #message {
@@ -91,7 +92,7 @@
 <body>
   <main class="container">
 
-    <img class="logo" src="./icon.svg" alt="Road Safety">
+    <img class="logo" src="./logo.png" alt="Toters Logo">
 
     <h1>Road Safety Reporting System</h1>
 
@@ -113,7 +114,7 @@
     </button>
 
     <div id="message">
-      Road Safety Reporting System
+      Toters Road Safety
     </div>
 
   </main>
@@ -124,7 +125,7 @@
     const installButton = document.getElementById("installButton");
     const message = document.getElementById("message");
 
-    window.addEventListener("beforeinstallprompt", (event) => {
+    window.addEventListener("beforeinstallprompt", event => {
       event.preventDefault();
       installPrompt = event;
       installButton.style.display = "block";
@@ -148,9 +149,7 @@
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("./sw.js")
-          .catch(error => {
-            console.error("Service Worker registration failed:", error);
-          });
+          .catch(error => console.error(error));
       });
     }
   </script>
